@@ -61,7 +61,7 @@ export default function ProductsPage() {
         </h3>
         <Slider
           value={priceRange}
-          onValueChange={(v) => setPriceRange(v as number[])}
+          onValueChange={(v) => setPriceRange([v[0], v[1]])}
           min={0}
           max={20000}
           step={500}
