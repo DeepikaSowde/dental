@@ -12,11 +12,11 @@ export default function BulkOrderPage() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 max-w-4xl">
       <div className="text-center mb-12">
-        <Badge className="mb-4 bg-[#00D4FF]/15 text-[#00D4FF] border border-[#00D4FF]/30">For Dealers & Hospitals</Badge>
-        <h1 className="text-4xl font-black font-outfit text-white mb-3">
+        <Badge className="mb-4 bg-[#1B5E20]/15 text-[#1B5E20] border border-[#1B5E20]/30">For Dealers & Hospitals</Badge>
+        <h1 className="text-4xl font-black font-outfit text-[#3E2723] mb-3">
           Bulk Order & <span className="gradient-text">Dealer Inquiry</span>
         </h1>
-        <p className="text-[#64748B] max-w-xl mx-auto">
+        <p className="text-[#5D4037] max-w-xl mx-auto">
           Special pricing for clinics, hospitals, and dealers. Fill the form and our team will contact you within 24 hours.
         </p>
       </div>
@@ -30,9 +30,9 @@ export default function BulkOrderPage() {
           { icon: Send, label: "Priority Delivery", sub: "Guaranteed SLA" },
         ].map(({ icon: Icon, label, sub }) => (
           <div key={label} className="card-glass rounded-xl p-4 text-center">
-            <Icon className="h-6 w-6 text-[#00D4FF] mx-auto mb-2" />
-            <div className="text-sm font-semibold text-white">{label}</div>
-            <div className="text-xs text-[#64748B] mt-0.5">{sub}</div>
+            <Icon className="h-6 w-6 text-[#1B5E20] mx-auto mb-2" />
+            <div className="text-sm font-semibold text-[#3E2723]">{label}</div>
+            <div className="text-xs text-[#5D4037] mt-0.5">{sub}</div>
           </div>
         ))}
       </div>
@@ -40,8 +40,8 @@ export default function BulkOrderPage() {
       {submitted ? (
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="card-glass rounded-2xl p-12 text-center">
           <div className="text-5xl mb-4">✅</div>
-          <h2 className="text-2xl font-bold text-white mb-2">Inquiry Received!</h2>
-          <p className="text-[#64748B]">Our dealer team will contact you within 24 hours.</p>
+          <h2 className="text-2xl font-bold text-[#3E2723] mb-2">Inquiry Received!</h2>
+          <p className="text-[#5D4037]">Our dealer team will contact you within 24 hours.</p>
         </motion.div>
       ) : (
         <div className="card-glass rounded-2xl p-8">
@@ -56,20 +56,20 @@ export default function BulkOrderPage() {
                 { label: "Dealer Type", placeholder: "Distributor / Retailer / Hospital", type: "text" },
               ].map(({ label, placeholder, type }) => (
                 <div key={label}>
-                  <label className="block text-xs font-medium text-[#BAE6FD] mb-1.5">{label}</label>
-                  <input type={type} required placeholder={placeholder} className="w-full h-11 px-4 rounded-xl bg-[#111827] border border-[#00D4FF]/15 text-[#BAE6FD] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-[#00D4FF]/50 transition-all" />
+                  <label className="block text-xs font-medium text-[#3E2723] mb-1.5">{label}</label>
+                  <input type={type} required placeholder={placeholder} className="w-full h-11 px-4 rounded-xl bg-[#FAF6ED] border border-[#1B5E20]/15 text-[#3E2723] placeholder:text-[#5D4037] text-sm focus:outline-none focus:border-[#1B5E20]/50 transition-all" />
                 </div>
               ))}
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#BAE6FD] mb-1.5">Products / Categories of Interest</label>
-              <input type="text" placeholder="e.g., Implants, Rotary Files, Dental Chairs" className="w-full h-11 px-4 rounded-xl bg-[#111827] border border-[#00D4FF]/15 text-[#BAE6FD] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-[#00D4FF]/50 transition-all" />
+              <label className="block text-xs font-medium text-[#3E2723] mb-1.5">Products / Categories of Interest</label>
+              <input type="text" placeholder="e.g., Implants, Rotary Files, Dental Chairs" className="w-full h-11 px-4 rounded-xl bg-[#FAF6ED] border border-[#1B5E20]/15 text-[#3E2723] placeholder:text-[#5D4037] text-sm focus:outline-none focus:border-[#1B5E20]/50 transition-all" />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#BAE6FD] mb-1.5">Estimated Monthly Order Value (₹)</label>
-              <select className="w-full h-11 px-4 rounded-xl bg-[#111827] border border-[#00D4FF]/15 text-[#BAE6FD] text-sm focus:outline-none focus:border-[#00D4FF]/40">
+              <label className="block text-xs font-medium text-[#3E2723] mb-1.5">Estimated Monthly Order Value (₹)</label>
+              <select className="w-full h-11 px-4 rounded-xl bg-[#FAF6ED] border border-[#1B5E20]/15 text-[#3E2723] text-sm focus:outline-none focus:border-[#1B5E20]/40">
                 <option value="">Select range</option>
                 <option>₹10,000 – ₹50,000</option>
                 <option>₹50,000 – ₹2,00,000</option>
@@ -79,11 +79,11 @@ export default function BulkOrderPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#BAE6FD] mb-1.5">Additional Notes</label>
-              <textarea rows={4} placeholder="Tell us more about your requirements..." className="w-full px-4 py-3 rounded-xl bg-[#111827] border border-[#00D4FF]/15 text-[#BAE6FD] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-[#00D4FF]/50 transition-all resize-none" />
+              <label className="block text-xs font-medium text-[#3E2723] mb-1.5">Additional Notes</label>
+              <textarea rows={4} placeholder="Tell us more about your requirements..." className="w-full px-4 py-3 rounded-xl bg-[#FAF6ED] border border-[#1B5E20]/15 text-[#3E2723] placeholder:text-[#5D4037] text-sm focus:outline-none focus:border-[#1B5E20]/50 transition-all resize-none" />
             </div>
 
-            <Button type="submit" className="w-full h-12 neon-btn text-[#0A0A0F] font-bold rounded-xl text-base">
+            <Button type="submit" className="w-full h-12 neon-btn text-[#FFFDF5] font-bold rounded-xl text-base">
               <Send className="h-4 w-4 mr-2" /> Submit Inquiry
             </Button>
           </form>

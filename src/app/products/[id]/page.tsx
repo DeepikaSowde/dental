@@ -2,6 +2,7 @@
 
 import { useState, use } from "react";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Star, Heart, ShoppingCart, Truck, Shield, RotateCcw, Zap,
@@ -50,14 +51,14 @@ export default function ProductDetailPage({ params }: PageProps) {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-xs text-[#64748B] mb-8">
-        <span className="hover:text-[#00D4FF] cursor-pointer">Home</span>
+      <div className="flex items-center gap-2 text-xs text-[#5D4037] mb-8">
+        <span className="hover:text-[#1B5E20] cursor-pointer">Home</span>
         <span>/</span>
-        <span className="hover:text-[#00D4FF] cursor-pointer">Products</span>
+        <span className="hover:text-[#1B5E20] cursor-pointer">Products</span>
         <span>/</span>
-        <span className="hover:text-[#00D4FF] cursor-pointer">{product.category}</span>
+        <span className="hover:text-[#1B5E20] cursor-pointer">{product.category}</span>
         <span>/</span>
-        <span className="text-[#00D4FF] line-clamp-1">{product.name}</span>
+        <span className="text-[#1B5E20] line-clamp-1">{product.name}</span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
@@ -78,7 +79,7 @@ export default function ProductDetailPage({ params }: PageProps) {
             )}
             {!product.inStock && (
               <div className="absolute inset-0 bg-black/60 z-10 flex items-center justify-center">
-                <span className="text-white font-semibold text-lg">Out of Stock</span>
+                <span className="text-[#3E2723] font-semibold text-lg">Out of Stock</span>
               </div>
             )}
             <img src={images[activeImg]} alt={product.name} className="w-full h-full object-contain p-10" />
@@ -86,13 +87,13 @@ export default function ProductDetailPage({ params }: PageProps) {
             {images.length > 1 && (
               <>
                 <button
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#0D1117]/80 border border-[#00D4FF]/20 flex items-center justify-center text-[#00D4FF] hover:border-[#00D4FF]/50 transition-all"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#FFFFFF]/80 border border-[#1B5E20]/20 flex items-center justify-center text-[#1B5E20] hover:border-[#1B5E20]/50 transition-all"
                   onClick={() => setActiveImg((activeImg - 1 + images.length) % images.length)}
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
                 <button
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#0D1117]/80 border border-[#00D4FF]/20 flex items-center justify-center text-[#00D4FF] hover:border-[#00D4FF]/50 transition-all"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#FFFFFF]/80 border border-[#1B5E20]/20 flex items-center justify-center text-[#1B5E20] hover:border-[#1B5E20]/50 transition-all"
                   onClick={() => setActiveImg((activeImg + 1) % images.length)}
                 >
                   <ChevronRight className="h-4 w-4" />
@@ -109,11 +110,11 @@ export default function ProductDetailPage({ params }: PageProps) {
                 onClick={() => setActiveImg(i)}
                 className={`aspect-square rounded-xl overflow-hidden cursor-pointer border-2 transition-all ${
                   activeImg === i
-                    ? "border-[#00D4FF] shadow-[0_0_12px_rgba(0,212,255,0.4)]"
-                    : "border-[#00D4FF]/10 hover:border-[#00D4FF]/35"
+                    ? "border-[#1B5E20] shadow-[0_0_12px_rgba(27,94,32,0.4)]"
+                    : "border-[#1B5E20]/10 hover:border-[#1B5E20]/35"
                 }`}
               >
-                <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-contain p-2 bg-[#0D1117]" />
+                <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-contain p-2 bg-[#FFFFFF]" />
               </div>
             ))}
           </div>
@@ -123,13 +124,13 @@ export default function ProductDetailPage({ params }: PageProps) {
         <div className="space-y-6">
           {/* Brand + Category */}
           <div className="flex items-center gap-2">
-            <Badge className="bg-[#00D4FF]/10 text-[#00D4FF] border border-[#00D4FF]/25 text-xs">{product.category}</Badge>
-            <span className="text-xs text-[#64748B]">by</span>
-            <span className="text-xs font-semibold text-[#BAE6FD]">{product.brand}</span>
+            <Badge className="bg-[#1B5E20]/10 text-[#1B5E20] border border-[#1B5E20]/25 text-xs">{product.category}</Badge>
+            <span className="text-xs text-[#5D4037]">by</span>
+            <span className="text-xs font-semibold text-[#3E2723]">{product.brand}</span>
           </div>
 
           {/* Name */}
-          <h1 className="text-2xl md:text-3xl font-bold font-outfit text-white leading-tight">
+          <h1 className="text-2xl md:text-3xl font-bold font-outfit text-[#3E2723] leading-tight">
             {product.name}
           </h1>
 
@@ -139,23 +140,23 @@ export default function ProductDetailPage({ params }: PageProps) {
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className={`h-4 w-4 ${i < Math.floor(product.rating) ? "text-[#F59E0B] fill-current" : "text-[#374151]"}`} />
               ))}
-              <span className="text-sm font-semibold text-white ml-1">{product.rating}</span>
+              <span className="text-sm font-semibold text-[#3E2723] ml-1">{product.rating}</span>
             </div>
-            <span className="text-sm text-[#64748B]">{product.reviews} reviews</span>
-            <button className="flex items-center gap-1 text-sm text-[#00D4FF] hover:text-[#00F5FF] transition-colors">
+            <span className="text-sm text-[#5D4037]">{product.reviews} reviews</span>
+            <button className="flex items-center gap-1 text-sm text-[#1B5E20] hover:text-[#81C784] transition-colors">
               <Share2 className="h-3.5 w-3.5" /> Share
             </button>
           </div>
 
           {/* Price */}
-          <div className="p-4 rounded-xl bg-[#0D1117] border border-[#00D4FF]/10">
+          <div className="p-4 rounded-xl bg-[#FFFFFF] border border-[#1B5E20]/10">
             <div className="flex items-baseline gap-3">
-              <span className="text-3xl font-black text-white">
+              <span className="text-3xl font-black text-[#3E2723]">
                 ₹{product.price.toLocaleString("en-IN")}
               </span>
               {product.originalPrice > product.price && (
                 <>
-                  <span className="text-lg text-[#64748B] line-through">
+                  <span className="text-lg text-[#5D4037] line-through">
                     ₹{product.originalPrice.toLocaleString("en-IN")}
                   </span>
                   <Badge className="bg-[#10B981]/15 text-[#10B981] border border-[#10B981]/30">
@@ -164,7 +165,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                 </>
               )}
             </div>
-            <p className="text-xs text-[#64748B] mt-1">Inclusive of all taxes · GST invoice available</p>
+            <p className="text-xs text-[#5D4037] mt-1">Inclusive of all taxes · GST invoice available</p>
           </div>
 
           {/* Stock Status */}
@@ -181,19 +182,19 @@ export default function ProductDetailPage({ params }: PageProps) {
 
           {/* Quantity + Add to Cart */}
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-0 border border-[#00D4FF]/20 rounded-xl overflow-hidden">
+            <div className="flex items-center gap-0 border border-[#1B5E20]/20 rounded-xl overflow-hidden">
               <button
                 onClick={() => setQty(Math.max(1, qty - 1))}
-                className="w-10 h-11 flex items-center justify-center text-[#BAE6FD] hover:text-[#00D4FF] hover:bg-[#00D4FF]/10 transition-colors"
+                className="w-10 h-11 flex items-center justify-center text-[#3E2723] hover:text-[#1B5E20] hover:bg-[#1B5E20]/10 transition-colors"
               >
                 <Minus className="h-4 w-4" />
               </button>
-              <span className="w-12 h-11 flex items-center justify-center text-white font-semibold text-sm border-x border-[#00D4FF]/10">
+              <span className="w-12 h-11 flex items-center justify-center text-[#3E2723] font-semibold text-sm border-x border-[#1B5E20]/10">
                 {qty}
               </span>
               <button
                 onClick={() => setQty(qty + 1)}
-                className="w-10 h-11 flex items-center justify-center text-[#BAE6FD] hover:text-[#00D4FF] hover:bg-[#00D4FF]/10 transition-colors"
+                className="w-10 h-11 flex items-center justify-center text-[#3E2723] hover:text-[#1B5E20] hover:bg-[#1B5E20]/10 transition-colors"
               >
                 <Plus className="h-4 w-4" />
               </button>
@@ -202,7 +203,7 @@ export default function ProductDetailPage({ params }: PageProps) {
             <Button
               onClick={handleAddToCart}
               disabled={!product.inStock}
-              className="flex-1 h-11 neon-btn text-[#0A0A0F] font-bold rounded-xl"
+              className="flex-1 h-11 neon-btn text-[#FFFDF5] font-bold rounded-xl"
             >
               <ShoppingCart className="h-4 w-4 mr-2" />
               Add to Cart
@@ -212,8 +213,8 @@ export default function ProductDetailPage({ params }: PageProps) {
               onClick={() => { toggle(product); toast(wishlisted ? "Removed from wishlist" : "Added to wishlist", { icon: wishlisted ? "💔" : "❤️" }); }}
               className={`w-11 h-11 rounded-xl border flex items-center justify-center transition-all ${
                 wishlisted
-                  ? "border-[#00D4FF]/50 bg-[#00D4FF]/15 text-[#00D4FF] shadow-[0_0_12px_rgba(0,212,255,0.3)]"
-                  : "border-[#00D4FF]/15 text-[#64748B] hover:border-[#00D4FF]/40 hover:text-[#00D4FF]"
+                  ? "border-[#1B5E20]/50 bg-[#1B5E20]/15 text-[#1B5E20] shadow-[0_0_12px_rgba(27,94,32,0.3)]"
+                  : "border-[#1B5E20]/15 text-[#5D4037] hover:border-[#1B5E20]/40 hover:text-[#1B5E20]"
               }`}
             >
               <Heart className={`h-4 w-4 ${wishlisted ? "fill-current" : ""}`} />
@@ -221,33 +222,33 @@ export default function ProductDetailPage({ params }: PageProps) {
           </div>
 
           {/* Buy Now */}
-          <Button variant="outline" className="w-full h-11 rounded-xl border-[#00D4FF]/30 text-[#00D4FF] hover:bg-[#00D4FF]/10 font-semibold">
+          <Button variant="outline" className="w-full h-11 rounded-xl border-[#1B5E20]/30 text-[#1B5E20] hover:bg-[#1B5E20]/10 font-semibold">
             <Zap className="h-4 w-4 mr-2" /> Buy Now
           </Button>
 
-          <Separator className="bg-[#00D4FF]/08" />
+          <Separator className="bg-[#1B5E20]/08" />
 
           {/* Trust Signals */}
-          <div className="grid grid-cols-3 gap-3 text-center text-xs text-[#64748B]">
-            <div className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-[#0D1117] border border-[#00D4FF]/05">
-              <Truck className="h-4 w-4 text-[#00D4FF]" />
+          <div className="grid grid-cols-3 gap-3 text-center text-xs text-[#5D4037]">
+            <div className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-[#FFFFFF] border border-[#1B5E20]/05">
+              <Truck className="h-4 w-4 text-[#1B5E20]" />
               Free Delivery above ₹5k
             </div>
-            <div className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-[#0D1117] border border-[#00D4FF]/05">
-              <Shield className="h-4 w-4 text-[#00D4FF]" />
+            <div className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-[#FFFFFF] border border-[#1B5E20]/05">
+              <Shield className="h-4 w-4 text-[#1B5E20]" />
               100% Genuine
             </div>
-            <div className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-[#0D1117] border border-[#00D4FF]/05">
-              <RotateCcw className="h-4 w-4 text-[#00D4FF]" />
-              Easy Returns
-            </div>
+            <Link href="/refund-cancellation" className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-[#FFFFFF] border border-[#1B5E20]/05 hover:border-[#1B5E20]/30 hover:shadow-[0_0_12px_rgba(27,94,32,0.1)] transition-all cursor-pointer">
+              <RotateCcw className="h-4 w-4 text-[#1B5E20]" />
+              <span className="hover:text-[#1B5E20] hover:underline underline-offset-2">Easy Returns</span>
+            </Link>
           </div>
 
           {/* Tags */}
           {product.tags && (
             <div className="flex flex-wrap gap-1.5">
               {product.tags.map((tag) => (
-                <span key={tag} className="text-[10px] px-2.5 py-1 rounded-full border border-[#00D4FF]/10 text-[#64748B] hover:border-[#00D4FF]/30 hover:text-[#00D4FF] transition-colors cursor-pointer">
+                <span key={tag} className="text-[10px] px-2.5 py-1 rounded-full border border-[#1B5E20]/10 text-[#5D4037] hover:border-[#1B5E20]/30 hover:text-[#1B5E20] transition-colors cursor-pointer">
                   #{tag}
                 </span>
               ))}
@@ -258,15 +259,15 @@ export default function ProductDetailPage({ params }: PageProps) {
 
       {/* ── Tabs ── */}
       <div className="mb-16">
-        <div className="flex gap-1 border-b border-[#00D4FF]/10 mb-8">
+        <div className="flex gap-1 border-b border-[#1B5E20]/10 mb-8">
           {TABS.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-5 py-3 text-sm font-medium transition-all border-b-2 -mb-px ${
                 activeTab === tab
-                  ? "text-[#00D4FF] border-[#00D4FF]"
-                  : "text-[#64748B] border-transparent hover:text-[#BAE6FD]"
+                  ? "text-[#1B5E20] border-[#1B5E20]"
+                  : "text-[#5D4037] border-transparent hover:text-[#3E2723]"
               }`}
             >
               {tab}
@@ -276,8 +277,8 @@ export default function ProductDetailPage({ params }: PageProps) {
 
         {activeTab === "Description" && (
           <div className="card-glass rounded-xl p-6">
-            <p className="text-[#BAE6FD] leading-relaxed mb-4">{product.description}</p>
-            <ul className="space-y-2 text-sm text-[#64748B]">
+            <p className="text-[#3E2723] leading-relaxed mb-4">{product.description}</p>
+            <ul className="space-y-2 text-sm text-[#5D4037]">
               {["Medical-grade quality", "ISO certified", "Suitable for professional use only", "Store in cool dry place"].map((item) => (
                 <li key={item} className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-[#10B981]" /> {item}
@@ -297,9 +298,9 @@ export default function ProductDetailPage({ params }: PageProps) {
               ["Reviews", `${product.reviews} verified reviews`],
               ["Availability", product.inStock ? "In Stock" : "Out of Stock"],
             ].map(([label, value], i) => (
-              <div key={label} className={`flex justify-between px-6 py-4 ${i % 2 === 0 ? "bg-[#00D4FF]/02" : ""}`}>
-                <span className="text-sm text-[#64748B]">{label}</span>
-                <span className="text-sm text-[#BAE6FD] font-medium">{value}</span>
+              <div key={label} className={`flex justify-between px-6 py-4 ${i % 2 === 0 ? "bg-[#1B5E20]/02" : ""}`}>
+                <span className="text-sm text-[#5D4037]">{label}</span>
+                <span className="text-sm text-[#3E2723] font-medium">{value}</span>
               </div>
             ))}
           </div>
@@ -315,8 +316,8 @@ export default function ProductDetailPage({ params }: PageProps) {
               <div key={i} className="card-glass rounded-xl p-5">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <div className="font-semibold text-white text-sm">{review.name}</div>
-                    <div className="text-xs text-[#64748B]">{review.date}</div>
+                    <div className="font-semibold text-[#3E2723] text-sm">{review.name}</div>
+                    <div className="text-xs text-[#5D4037]">{review.date}</div>
                   </div>
                   <div className="flex">
                     {[...Array(review.rating)].map((_, s) => (
@@ -324,16 +325,16 @@ export default function ProductDetailPage({ params }: PageProps) {
                     ))}
                   </div>
                 </div>
-                <p className="text-sm text-[#BAE6FD]">{review.text}</p>
+                <p className="text-sm text-[#3E2723]">{review.text}</p>
               </div>
             ))}
           </div>
         )}
 
         {activeTab === "Q&A" && (
-          <div className="card-glass rounded-xl p-6 text-center text-[#64748B]">
+          <div className="card-glass rounded-xl p-6 text-center text-[#5D4037]">
             <p className="text-sm">No questions yet. Be the first to ask!</p>
-            <Button className="mt-4 neon-btn text-[#0A0A0F] font-semibold text-sm">Ask a Question</Button>
+            <Button className="mt-4 neon-btn text-[#FFFDF5] font-semibold text-sm">Ask a Question</Button>
           </div>
         )}
       </div>
@@ -341,7 +342,7 @@ export default function ProductDetailPage({ params }: PageProps) {
       {/* ── Related Products ── */}
       {related.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold font-outfit text-white mb-8">
+          <h2 className="text-2xl font-bold font-outfit text-[#3E2723] mb-8">
             Related <span className="gradient-text">Products</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">

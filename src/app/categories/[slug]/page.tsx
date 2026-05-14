@@ -25,29 +25,29 @@ export default function CategoryPage({ params }: PageProps) {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-xs text-[#64748B] mb-8">
-        <Link href="/" className="hover:text-[#00D4FF] transition-colors">Home</Link>
+      <div className="flex items-center gap-2 text-xs text-[#5D4037] mb-8">
+        <Link href="/" className="hover:text-[#1B5E20] transition-colors">Home</Link>
         <span>/</span>
-        <Link href="/products" className="hover:text-[#00D4FF] transition-colors">Products</Link>
+        <Link href="/products" className="hover:text-[#1B5E20] transition-colors">Products</Link>
         <span>/</span>
-        <span className="text-[#00D4FF]">{category.name}</span>
+        <span className="text-[#1B5E20]">{category.name}</span>
       </div>
 
       {/* Category Hero */}
-      <div className={`relative rounded-2xl overflow-hidden mb-10 p-8 border border-[#00D4FF]/10 bg-gradient-to-r ${category.gradient} bg-[#0D1117]`}>
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00D4FF]/40 to-transparent" />
+      <div className={`relative rounded-2xl overflow-hidden mb-10 p-8 border border-[#1B5E20]/10 bg-gradient-to-r ${category.gradient} bg-[#FFFFFF]`}>
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1B5E20]/40 to-transparent" />
         <div className="flex items-center gap-5">
-          <div className="w-20 h-20 rounded-2xl bg-[#0A0A0F]/60 border border-[#00D4FF]/20 flex items-center justify-center text-5xl shadow-[0_0_24px_rgba(0,212,255,0.15)]">
+          <div className="w-20 h-20 rounded-2xl bg-[#FFFDF5]/60 border border-[#1B5E20]/20 flex items-center justify-center text-5xl shadow-[0_0_24px_rgba(27,94,32,0.15)]">
             {category.icon}
           </div>
           <div>
-            <Badge className="mb-2 bg-[#00D4FF]/10 text-[#00D4FF] border border-[#00D4FF]/25 text-[10px]">
+            <Badge className="mb-2 bg-[#1B5E20]/10 text-[#1B5E20] border border-[#1B5E20]/25 text-[10px]">
               {category.count} products
             </Badge>
-            <h1 className="text-3xl font-black font-outfit text-white">
+            <h1 className="text-3xl font-black font-outfit text-[#3E2723]">
               {category.name}
             </h1>
-            <p className="text-[#64748B] text-sm mt-1">
+            <p className="text-[#5D4037] text-sm mt-1">
               Premium dental {category.name.toLowerCase()} supplies from top brands
             </p>
           </div>
@@ -57,7 +57,7 @@ export default function CategoryPage({ params }: PageProps) {
       {/* Back link */}
       <Link
         href="/products"
-        className="inline-flex items-center gap-2 text-sm text-[#64748B] hover:text-[#00D4FF] transition-colors mb-8"
+        className="inline-flex items-center gap-2 text-sm text-[#5D4037] hover:text-[#1B5E20] transition-colors mb-8"
       >
         <ArrowLeft className="h-3.5 w-3.5" />
         All Products
@@ -67,16 +67,16 @@ export default function CategoryPage({ params }: PageProps) {
       {products.length === 0 ? (
         <div className="text-center py-20">
           <div className="text-5xl mb-4">{category.icon}</div>
-          <h2 className="text-xl font-bold text-white mb-2">
+          <h2 className="text-xl font-bold text-[#3E2723] mb-2">
             Coming Soon
           </h2>
-          <p className="text-[#64748B] text-sm">
+          <p className="text-[#5D4037] text-sm">
             We&apos;re stocking {category.name} products. Check back soon!
           </p>
           <Link href="/products" className="mt-6 inline-block">
             <motion.div
               whileHover={{ scale: 1.03 }}
-              className="px-6 py-3 rounded-xl neon-btn text-[#0A0A0F] font-bold text-sm"
+              className="px-6 py-3 rounded-xl neon-btn text-[#FFFDF5] font-bold text-sm"
             >
               Browse All Products
             </motion.div>

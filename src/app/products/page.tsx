@@ -56,8 +56,8 @@ export default function ProductsPage() {
     <div className="space-y-8">
       {/* Price Range */}
       <div>
-        <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-          <span className="w-1 h-3 rounded-full bg-[#00D4FF]" /> Price Range
+        <h3 className="text-sm font-semibold text-[#3E2723] mb-4 flex items-center gap-2">
+          <span className="w-1 h-3 rounded-full bg-[#1B5E20]" /> Price Range
         </h3>
         <Slider
           value={priceRange}
@@ -67,7 +67,7 @@ export default function ProductsPage() {
           step={500}
           className="mb-3"
         />
-        <div className="flex justify-between text-xs text-[#64748B]">
+        <div className="flex justify-between text-xs text-[#5D4037]">
           <span>₹{priceRange[0].toLocaleString("en-IN")}</span>
           <span>₹{priceRange[1].toLocaleString("en-IN")}</span>
         </div>
@@ -75,8 +75,8 @@ export default function ProductsPage() {
 
       {/* Categories */}
       <div>
-        <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-          <span className="w-1 h-3 rounded-full bg-[#00D4FF]" /> Categories
+        <h3 className="text-sm font-semibold text-[#3E2723] mb-4 flex items-center gap-2">
+          <span className="w-1 h-3 rounded-full bg-[#1B5E20]" /> Categories
         </h3>
         <div className="space-y-2">
           {CATEGORIES.map((cat) => (
@@ -85,17 +85,17 @@ export default function ProductsPage() {
                 onClick={() => toggleCategory(cat.name)}
                 className={`w-4 h-4 rounded border flex items-center justify-center cursor-pointer transition-all ${
                   selectedCategories.includes(cat.name)
-                    ? "bg-[#00D4FF] border-[#00D4FF] shadow-[0_0_8px_rgba(0,212,255,0.6)]"
-                    : "border-[#00D4FF]/25 bg-transparent hover:border-[#00D4FF]/50"
+                    ? "bg-[#1B5E20] border-[#1B5E20] shadow-[0_0_8px_rgba(27,94,32,0.6)]"
+                    : "border-[#1B5E20]/25 bg-transparent hover:border-[#1B5E20]/50"
                 }`}
               >
                 {selectedCategories.includes(cat.name) && (
-                  <svg className="w-2.5 h-2.5 text-[#0A0A0F]" viewBox="0 0 10 10" fill="currentColor">
+                  <svg className="w-2.5 h-2.5 text-[#FFFDF5]" viewBox="0 0 10 10" fill="currentColor">
                     <path d="M8.5 2L4 7.5 1.5 5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
                   </svg>
                 )}
               </div>
-              <span className="text-sm text-[#BAE6FD] group-hover:text-[#00D4FF] transition-colors">{cat.name}</span>
+              <span className="text-sm text-[#3E2723] group-hover:text-[#1B5E20] transition-colors">{cat.name}</span>
             </label>
           ))}
         </div>
@@ -103,8 +103,8 @@ export default function ProductsPage() {
 
       {/* Brands */}
       <div>
-        <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-          <span className="w-1 h-3 rounded-full bg-[#00D4FF]" /> Brands
+        <h3 className="text-sm font-semibold text-[#3E2723] mb-4 flex items-center gap-2">
+          <span className="w-1 h-3 rounded-full bg-[#1B5E20]" /> Brands
         </h3>
         <div className="space-y-2">
           {BRANDS.map((brand) => (
@@ -113,17 +113,17 @@ export default function ProductsPage() {
                 onClick={() => toggleBrand(brand)}
                 className={`w-4 h-4 rounded border flex items-center justify-center cursor-pointer transition-all ${
                   selectedBrands.includes(brand)
-                    ? "bg-[#00D4FF] border-[#00D4FF] shadow-[0_0_8px_rgba(0,212,255,0.6)]"
-                    : "border-[#00D4FF]/25 bg-transparent hover:border-[#00D4FF]/50"
+                    ? "bg-[#1B5E20] border-[#1B5E20] shadow-[0_0_8px_rgba(27,94,32,0.6)]"
+                    : "border-[#1B5E20]/25 bg-transparent hover:border-[#1B5E20]/50"
                 }`}
               >
                 {selectedBrands.includes(brand) && (
-                  <svg className="w-2.5 h-2.5 text-[#0A0A0F]" viewBox="0 0 10 10" fill="currentColor">
+                  <svg className="w-2.5 h-2.5 text-[#FFFDF5]" viewBox="0 0 10 10" fill="currentColor">
                     <path d="M8.5 2L4 7.5 1.5 5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
                   </svg>
                 )}
               </div>
-              <span className="text-sm text-[#BAE6FD] group-hover:text-[#00D4FF] transition-colors">{brand}</span>
+              <span className="text-sm text-[#3E2723] group-hover:text-[#1B5E20] transition-colors">{brand}</span>
             </label>
           ))}
         </div>
@@ -131,10 +131,10 @@ export default function ProductsPage() {
 
       {/* In Stock Toggle */}
       <div className="flex items-center justify-between">
-        <span className="text-sm text-[#BAE6FD]">In Stock Only</span>
+        <span className="text-sm text-[#3E2723]">In Stock Only</span>
         <button
           onClick={() => setInStockOnly(!inStockOnly)}
-          className={`relative w-10 h-5 rounded-full transition-all ${inStockOnly ? "bg-[#00D4FF] shadow-[0_0_10px_rgba(0,212,255,0.5)]" : "bg-[#374151]"}`}
+          className={`relative w-10 h-5 rounded-full transition-all ${inStockOnly ? "bg-[#1B5E20] shadow-[0_0_10px_rgba(27,94,32,0.5)]" : "bg-[#374151]"}`}
         >
           <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white transition-transform ${inStockOnly ? "translate-x-5" : ""}`} />
         </button>
@@ -146,13 +146,13 @@ export default function ProductsPage() {
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Header */}
       <div className="mb-8">
-        <div className="flex items-center gap-2 text-xs text-[#64748B] mb-3">
-          <span>Home</span><span>/</span><span className="text-[#00D4FF]">All Products</span>
+        <div className="flex items-center gap-2 text-xs text-[#5D4037] mb-3">
+          <span>Home</span><span>/</span><span className="text-[#1B5E20]">All Products</span>
         </div>
-        <h1 className="text-3xl font-bold font-outfit text-white">
+        <h1 className="text-3xl font-bold font-outfit text-[#3E2723]">
           All <span className="gradient-text">Products</span>
         </h1>
-        <p className="text-[#64748B] mt-1">{filtered.length} products found</p>
+        <p className="text-[#5D4037] mt-1">{filtered.length} products found</p>
       </div>
 
       {/* Active Filters */}
@@ -161,7 +161,7 @@ export default function ProductsPage() {
           {selectedCategories.map((cat) => (
             <Badge
               key={cat}
-              className="bg-[#00D4FF]/15 text-[#00D4FF] border border-[#00D4FF]/30 cursor-pointer hover:bg-[#00D4FF]/25 transition-colors"
+              className="bg-[#1B5E20]/15 text-[#1B5E20] border border-[#1B5E20]/30 cursor-pointer hover:bg-[#1B5E20]/25 transition-colors"
               onClick={() => toggleCategory(cat)}
             >
               {cat} <X className="h-3 w-3 ml-1.5" />
@@ -170,7 +170,7 @@ export default function ProductsPage() {
           {selectedBrands.map((brand) => (
             <Badge
               key={brand}
-              className="bg-[#00D4FF]/15 text-[#00D4FF] border border-[#00D4FF]/30 cursor-pointer hover:bg-[#00D4FF]/25 transition-colors"
+              className="bg-[#1B5E20]/15 text-[#1B5E20] border border-[#1B5E20]/30 cursor-pointer hover:bg-[#1B5E20]/25 transition-colors"
               onClick={() => toggleBrand(brand)}
             >
               {brand} <X className="h-3 w-3 ml-1.5" />
@@ -184,11 +184,11 @@ export default function ProductsPage() {
         <aside className="hidden lg:block w-64 shrink-0">
           <div className="card-glass rounded-xl p-6 sticky top-24">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="font-semibold text-white flex items-center gap-2">
-                <SlidersHorizontal className="h-4 w-4 text-[#00D4FF]" /> Filters
+              <h2 className="font-semibold text-[#3E2723] flex items-center gap-2">
+                <SlidersHorizontal className="h-4 w-4 text-[#1B5E20]" /> Filters
               </h2>
               <button
-                className="text-xs text-[#00D4FF] hover:text-[#00F5FF]"
+                className="text-xs text-[#1B5E20] hover:text-[#81C784]"
                 onClick={() => { setSelectedCategories([]); setSelectedBrands([]); setPriceRange([0, 20000]); setInStockOnly(false); }}
               >
                 Clear All
@@ -201,12 +201,12 @@ export default function ProductsPage() {
         {/* Main Content */}
         <div className="flex-1">
           {/* Toolbar */}
-          <div className="flex items-center justify-between gap-4 mb-6 p-4 rounded-xl border border-[#00D4FF]/08 bg-[#0D1117]/60">
+          <div className="flex items-center justify-between gap-4 mb-6 p-4 rounded-xl border border-[#1B5E20]/08 bg-[#FFFFFF]/60">
             {/* Mobile Filter Button */}
             <Button
               variant="outline"
               size="sm"
-              className="lg:hidden border-[#00D4FF]/25 text-[#BAE6FD] hover:text-[#00D4FF] hover:border-[#00D4FF]/50"
+              className="lg:hidden border-[#1B5E20]/25 text-[#3E2723] hover:text-[#1B5E20] hover:border-[#1B5E20]/50"
               onClick={() => setFilterOpen(!filterOpen)}
             >
               <Filter className="h-4 w-4 mr-1.5" /> Filters
@@ -214,25 +214,25 @@ export default function ProductsPage() {
 
             {/* Sort */}
             <div className="flex items-center gap-2 ml-auto">
-              <span className="text-xs text-[#64748B] hidden sm:block">Sort by:</span>
+              <span className="text-xs text-[#5D4037] hidden sm:block">Sort by:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="bg-[#111827] border border-[#00D4FF]/15 text-[#BAE6FD] text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-[#00D4FF]/40"
+                className="bg-[#FAF6ED] border border-[#1B5E20]/15 text-[#3E2723] text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-[#1B5E20]/40"
               >
                 {SORT_OPTIONS.map((opt) => <option key={opt}>{opt}</option>)}
               </select>
               {/* View Toggle */}
-              <div className="flex gap-1 border border-[#00D4FF]/15 rounded-lg p-1">
+              <div className="flex gap-1 border border-[#1B5E20]/15 rounded-lg p-1">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`p-1.5 rounded-md transition-colors ${viewMode === "grid" ? "bg-[#00D4FF]/20 text-[#00D4FF]" : "text-[#64748B] hover:text-[#BAE6FD]"}`}
+                  className={`p-1.5 rounded-md transition-colors ${viewMode === "grid" ? "bg-[#1B5E20]/20 text-[#1B5E20]" : "text-[#5D4037] hover:text-[#3E2723]"}`}
                 >
                   <Grid3X3 className="h-3.5 w-3.5" />
                 </button>
                 <button
                   onClick={() => setViewMode("list")}
-                  className={`p-1.5 rounded-md transition-colors ${viewMode === "list" ? "bg-[#00D4FF]/20 text-[#00D4FF]" : "text-[#64748B] hover:text-[#BAE6FD]"}`}
+                  className={`p-1.5 rounded-md transition-colors ${viewMode === "list" ? "bg-[#1B5E20]/20 text-[#1B5E20]" : "text-[#5D4037] hover:text-[#3E2723]"}`}
                 >
                   <List className="h-3.5 w-3.5" />
                 </button>
@@ -256,8 +256,8 @@ export default function ProductsPage() {
             {filtered.length === 0 ? (
               <div className="col-span-full text-center py-16">
                 <div className="text-4xl mb-4">🦷</div>
-                <h3 className="text-white font-semibold mb-2">No products found</h3>
-                <p className="text-[#64748B] text-sm">Try adjusting your filters</p>
+                <h3 className="text-[#3E2723] font-semibold mb-2">No products found</h3>
+                <p className="text-[#5D4037] text-sm">Try adjusting your filters</p>
               </div>
             ) : (
               filtered.map((product, i) => (

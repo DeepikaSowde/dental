@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable} h-full antialiased dark`}>
-      <body className="min-h-full flex flex-col font-sans bg-[#0A0A0F]">
+      <body className="min-h-full flex flex-col font-sans bg-[#FFFDF5]">
         <Navbar />
         <main className="flex-1">
           {children}
@@ -35,8 +35,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           theme="dark"
           toastOptions={{
             style: {
-              background: "#0D1117",
-              border: "1px solid rgba(0,212,255,0.2)",
+              background: "#FFFFFF",
+              border: "1px solid rgba(27,94,32,0.2)",
               color: "#E2F8FF",
             },
           }}

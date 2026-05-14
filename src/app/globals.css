@@ -48,46 +48,46 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── Thaarwin Enterprises Dark Neon Theme ─── */
+/* ─── Thaarwin Enterprises Light Natural Theme ─── */
 :root {
-  --background: #0A0A0F;
-  --foreground: #E2F8FF;
-  --card: #0D1117;
-  --card-foreground: #E2F8FF;
-  --popover: #0D1117;
-  --popover-foreground: #E2F8FF;
-  --primary: #00D4FF;
-  --primary-foreground: #0A0A0F;
-  --secondary: #0099CC;
-  --secondary-foreground: #FFFFFF;
-  --muted: #111827;
-  --muted-foreground: #64748B;
-  --accent: #00B5A8;
+  --background: #FFFDF5;
+  --foreground: #3E2723;
+  --card: #FFFFFF;
+  --card-foreground: #3E2723;
+  --popover: #FFFFFF;
+  --popover-foreground: #3E2723;
+  --primary: #1B5E20;
+  --primary-foreground: #FFFFFF;
+  --secondary: #81C784;
+  --secondary-foreground: #3E2723;
+  --muted: #FAF6ED;
+  --muted-foreground: #5D4037;
+  --accent: #00796B;
   --accent-foreground: #FFFFFF;
   --destructive: #EF4444;
-  --border: rgba(0, 212, 255, 0.12);
-  --input: rgba(0, 212, 255, 0.08);
-  --ring: #00D4FF;
-  --chart-1: #00D4FF;
-  --chart-2: #00F5FF;
-  --chart-3: #00B5A8;
+  --border: #D7CEC3;
+  --input: #D7CEC3;
+  --ring: #1B5E20;
+  --chart-1: #1B5E20;
+  --chart-2: #81C784;
+  --chart-3: #00796B;
   --chart-4: #F59E0B;
   --chart-5: #10B981;
   --radius: 0.75rem;
-  --sidebar: #0D1117;
-  --sidebar-foreground: #E2F8FF;
-  --sidebar-primary: #00D4FF;
-  --sidebar-primary-foreground: #0A0A0F;
-  --sidebar-accent: #111827;
-  --sidebar-accent-foreground: #BAE6FD;
-  --sidebar-border: rgba(0, 212, 255, 0.12);
-  --sidebar-ring: #00D4FF;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #3E2723;
+  --sidebar-primary: #1B5E20;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #FAF6ED;
+  --sidebar-accent-foreground: #1B5E20;
+  --sidebar-border: #D7CEC3;
+  --sidebar-ring: #1B5E20;
   --success: #10B981;
   --warning: #F59E0B;
-  /* Neon glow values */
-  --glow-primary: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 40px rgba(0, 212, 255, 0.15);
-  --glow-secondary: 0 0 20px rgba(0, 153, 204, 0.4), 0 0 40px rgba(0, 153, 204, 0.15);
-  --glow-accent: 0 0 20px rgba(0, 181, 168, 0.4);
+  /* Organic soft shadow values */
+  --shadow-primary: 0 4px 20px rgba(27, 94, 32, 0.15), 0 0 40px rgba(27, 94, 32, 0.05);
+  --shadow-secondary: 0 4px 20px rgba(129, 199, 132, 0.2);
+  --shadow-accent: 0 4px 20px rgba(0, 121, 107, 0.15);
 }
 
 @layer base {
@@ -97,8 +97,8 @@
   body {
     @apply bg-background text-foreground;
     background-image:
-      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 212, 255, 0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0, 181, 168, 0.04) 0%, transparent 50%);
+      radial-gradient(circle at top right, rgba(129, 199, 132, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at bottom left, rgba(0, 121, 107, 0.05) 0%, transparent 40%);
     background-attachment: fixed;
   }
   html {
@@ -106,70 +106,74 @@
   }
 }
 
-/* ─── Neon glow utility classes ─── */
+/* ─── Organic Theme utility classes ─── */
 @layer utilities {
   .glow-primary {
-    box-shadow: var(--glow-primary);
+    box-shadow: var(--shadow-primary);
   }
   .glow-secondary {
-    box-shadow: var(--glow-secondary);
+    box-shadow: var(--shadow-secondary);
   }
   .glow-accent {
-    box-shadow: var(--glow-accent);
+    box-shadow: var(--shadow-accent);
   }
   .text-glow {
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.3);
+    text-shadow: 0 2px 10px rgba(27, 94, 32, 0.2);
   }
   .border-glow {
-    border-color: rgba(0, 212, 255, 0.4);
-    box-shadow: 0 0 12px rgba(0, 212, 255, 0.15), inset 0 0 12px rgba(0, 212, 255, 0.03);
+    border-color: rgba(129, 199, 132, 0.6);
+    box-shadow: 0 4px 12px rgba(129, 199, 132, 0.1);
   }
   .card-glass {
-    background: rgba(13, 17, 23, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 212, 255, 0.1);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(215, 206, 195, 0.6);
+    box-shadow: 0 8px 32px rgba(62, 39, 35, 0.04);
   }
   .card-glass:hover {
-    border-color: rgba(0, 212, 255, 0.35);
-    box-shadow: 0 0 24px rgba(0, 212, 255, 0.12), 0 0 48px rgba(0, 212, 255, 0.05);
+    border-color: rgba(129, 199, 132, 0.4);
+    box-shadow: 0 12px 40px rgba(27, 94, 32, 0.08);
   }
   .neon-btn {
-    background: linear-gradient(135deg, #00D4FF, #0099CC);
-    box-shadow: 0 0 16px rgba(0, 212, 255, 0.5), 0 4px 24px rgba(0, 212, 255, 0.25);
+    background: linear-gradient(135deg, #1B5E20, #00796B);
+    box-shadow: 0 4px 12px rgba(27, 94, 32, 0.25);
+    color: white !important;
     transition: all 0.3s ease;
   }
   .neon-btn:hover {
-    box-shadow: 0 0 28px rgba(0, 212, 255, 0.8), 0 4px 40px rgba(0, 212, 255, 0.4);
-    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(27, 94, 32, 0.35);
+    transform: translateY(-2px);
   }
   .gradient-text {
-    background: linear-gradient(135deg, #00D4FF 0%, #00F5FF 50%, #00B5A8 100%);
+    background: linear-gradient(135deg, #1B5E20 0%, #00796B 50%, #81C784 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .scanline-overlay::before {
+    /* Removed scanline for organic theme, keeping subtle texture instead */
     content: '';
     position: absolute;
     inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 212, 255, 0.015) 2px,
-      rgba(0, 212, 255, 0.015) 4px
-    );
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.02"/></svg>');
     pointer-events: none;
     z-index: 0;
+    mix-blend-mode: multiply;
   }
 }
 
 /* ─── Custom scrollbar ─── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #0A0A0F; }
-::-webkit-scrollbar-thumb { background: rgba(0, 212, 255, 0.3); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(0, 212, 255, 0.6); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #FFFDF5; }
+::-webkit-scrollbar-thumb { background: rgba(129, 199, 132, 0.6); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(27, 94, 32, 0.8); }
 
 /* ─── Selection ─── */
-::selection { background: rgba(0, 212, 255, 0.25); color: #fff; }
+::selection { background: rgba(129, 199, 132, 0.4); color: #1B5E20; }
+
+/* ─── Logo Color Adjustment ─── */
+/* Shifts the glowing blue deer logo to a harmonic green tint */
+img[src*="logo.jpeg"] {
+  filter: hue-rotate(-45deg) saturate(1.2);
+}

@@ -18,7 +18,7 @@ const BADGE_STYLES: Record<string, string> = {
   Bestseller: "bg-[#F59E0B]/15 text-[#F59E0B] border-[#F59E0B]/30",
   New:        "bg-[#10B981]/15 text-[#10B981] border-[#10B981]/30",
   Deal:       "bg-[#FF6B6B]/15 text-[#FF6B6B] border-[#FF6B6B]/30",
-  default:    "bg-[#00D4FF]/15 text-[#00D4FF] border-[#00D4FF]/30",
+  default:    "bg-[#1B5E20]/15 text-[#1B5E20] border-[#1B5E20]/30",
 };
 
 export function ProductCard({ product, index = 0 }: ProductCardProps) {
@@ -55,9 +55,9 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       transition={{ duration: 0.4, delay: index * 0.06 }}
     >
       <Link href={`/products/${product.id}`}>
-        <div className="group relative rounded-xl overflow-hidden card-glass transition-all duration-300 hover:shadow-[0_0_32px_rgba(0,212,255,0.12)] cursor-pointer">
+        <div className="group relative rounded-xl overflow-hidden card-glass transition-all duration-300 hover:shadow-[0_0_32px_rgba(27,94,32,0.12)] cursor-pointer">
           {/* Image Container */}
-          <div className="relative aspect-square bg-[#111827] overflow-hidden">
+          <div className="relative aspect-square bg-[#FAF6ED] overflow-hidden">
             {/* Badges */}
             <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
               {product.badge && (
@@ -66,7 +66,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
                 </Badge>
               )}
               {discount > 0 && (
-                <Badge className="text-[10px] font-semibold px-2 py-0.5 bg-[#00D4FF]/15 text-[#00D4FF] border border-[#00D4FF]/30">
+                <Badge className="text-[10px] font-semibold px-2 py-0.5 bg-[#1B5E20]/15 text-[#1B5E20] border border-[#1B5E20]/30">
                   -{discount}%
                 </Badge>
               )}
@@ -82,8 +82,8 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               onClick={handleWishlist}
               className={`absolute top-3 right-3 z-10 w-8 h-8 rounded-full border flex items-center justify-center transition-all ${
                 wishlisted
-                  ? "bg-[#00D4FF]/20 border-[#00D4FF]/50 text-[#00D4FF] shadow-[0_0_10px_rgba(0,212,255,0.4)]"
-                  : "bg-[#0A0A0F]/60 border-[#00D4FF]/10 text-[#64748B] hover:border-[#00D4FF]/40 hover:text-[#00D4FF]"
+                  ? "bg-[#1B5E20]/20 border-[#1B5E20]/50 text-[#1B5E20] shadow-[0_0_10px_rgba(27,94,32,0.4)]"
+                  : "bg-[#FFFDF5]/60 border-[#1B5E20]/10 text-[#5D4037] hover:border-[#1B5E20]/40 hover:text-[#1B5E20]"
               }`}
             >
               <Heart className={`h-3.5 w-3.5 ${wishlisted ? "fill-current" : ""}`} />
@@ -101,7 +101,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               <Button
                 onClick={handleAddToCart}
                 disabled={!product.inStock}
-                className="flex-1 h-9 neon-btn text-[#0A0A0F] font-semibold text-xs rounded-lg"
+                className="flex-1 h-9 neon-btn text-[#FFFDF5] font-semibold text-xs rounded-lg"
               >
                 <ShoppingCart className="h-3.5 w-3.5 mr-1.5" />
                 Add to Cart
@@ -109,7 +109,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               <Button
                 variant="outline"
                 size="icon"
-                className="h-9 w-9 rounded-lg border-[#00D4FF]/30 bg-[#0A0A0F]/80 text-[#00D4FF] hover:bg-[#00D4FF]/10"
+                className="h-9 w-9 rounded-lg border-[#1B5E20]/30 bg-[#FFFDF5]/80 text-[#1B5E20] hover:bg-[#1B5E20]/10"
               >
                 <Eye className="h-3.5 w-3.5" />
               </Button>
@@ -118,10 +118,10 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
 
           {/* Product Info */}
           <div className="p-4">
-            <div className="text-[10px] font-semibold text-[#00D4FF]/70 uppercase tracking-wider mb-1.5">
+            <div className="text-[10px] font-semibold text-[#1B5E20]/70 uppercase tracking-wider mb-1.5">
               {product.brand}
             </div>
-            <h3 className="text-sm font-medium text-[#BAE6FD] line-clamp-2 min-h-[2.5rem] group-hover:text-white transition-colors mb-2">
+            <h3 className="text-sm font-medium text-[#3E2723] line-clamp-2 min-h-[2.5rem] group-hover:text-[#3E2723] transition-colors mb-2">
               {product.name}
             </h3>
 
@@ -135,17 +135,17 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
                   />
                 ))}
               </div>
-              <span className="text-xs text-[#64748B]">({product.reviews})</span>
+              <span className="text-xs text-[#5D4037]">({product.reviews})</span>
             </div>
 
             {/* Price */}
             <div className="flex items-baseline justify-between">
               <div className="flex items-baseline gap-2">
-                <span className="text-lg font-bold text-white">
+                <span className="text-lg font-bold text-[#3E2723]">
                   ₹{product.price.toLocaleString("en-IN")}
                 </span>
                 {product.originalPrice > product.price && (
-                  <span className="text-xs text-[#64748B] line-through">
+                  <span className="text-xs text-[#5D4037] line-through">
                     ₹{product.originalPrice.toLocaleString("en-IN")}
                   </span>
                 )}
