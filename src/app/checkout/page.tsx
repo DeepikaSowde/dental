@@ -1,42 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, MapPin, CreditCard, Truck, ChevronRight, Lock, Smartphone, Wallet, Building2, Banknote, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/lib/store";
-import Script from "next/script";
-
-declare global {
-  interface Window {
-    Razorpay: new (options: RazorpayOptions) => RazorpayInstance;
-  }
-}
-
-interface RazorpayOptions {
-  key: string;
-  amount: number;
-  currency: string;
-  name: string;
-  description: string;
-  order_id: string;
-  prefill: { name: string; email: string; contact: string };
-  theme: { color: string };
-  handler: (response: RazorpayResponse) => void;
-  modal: { ondismiss: () => void };
-}
-
-interface RazorpayInstance {
-  open: () => void;
-}
-
-interface RazorpayResponse {
-  razorpay_order_id: string;
-  razorpay_payment_id: string;
-  razorpay_signature: string;
-}
 
 const STEPS = ["Cart", "Address", "Payment", "Confirmation"];
 
@@ -77,60 +47,71 @@ export default function CheckoutPage() {
     setStep(2);
   };
 
-  const handleRazorpayPayment = async () => {
+  // When Omniware redirects the customer back, its callback route lands here
+  // with ?payment=success|failure|tampered|unknown. Reflect that outcome, then
+  // strip the query so a refresh doesn't re-trigger it.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const pay = params.get("payment");
+    if (!pay) return;
+    if (pay === "success") {
+      setPaymentResult("success");
+      setStep(3);
+      clearCart();
+    } else if (pay === "failure" || pay === "tampered" || pay === "unknown") {
+      setPaymentResult("failure");
+      setStep(2);
+    }
+    window.history.replaceState({}, "", "/checkout");
+  }, [clearCart]);
+
+  const handleOmniwarePayment = async () => {
     if (!agreed) return;
+
+    // Cash on Delivery skips the gateway entirely — place the order directly.
+    if (paymentMethod === "cod") {
+      setPaymentResult("success");
+      setStep(3);
+      clearCart();
+      return;
+    }
+
     setProcessing(true);
     setPaymentResult(null);
 
     try {
-      const orderRes = await fetch("/api/razorpay/create-order", {
+      const res = await fetch("/api/omniware/initiate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: finalTotal }),
-      });
-      const orderData = await orderRes.json();
-
-      if (!orderRes.ok) throw new Error(orderData.error || "Order creation failed");
-
-      const options: RazorpayOptions = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-        amount: orderData.amount,
-        currency: orderData.currency,
-        name: "Thaarwin Enterprises",
-        description: "Dental Supplies Order",
-        order_id: orderData.orderId,
-        prefill: {
+        body: JSON.stringify({
+          amount: finalTotal,
           name: address.name,
           email: address.email,
-          contact: address.phone,
-        },
-        theme: { color: "#1B5E20" },
-        handler: async (response: RazorpayResponse) => {
-          const verifyRes = await fetch("/api/razorpay/verify-payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(response),
-          });
-          const verifyData = await verifyRes.json();
+          phone: address.phone,
+          address_line_1: address.address,
+          city: address.city,
+          state: address.state,
+          zip_code: address.pincode,
+          description: `Dental Supplies Order (${items.length} item${items.length === 1 ? "" : "s"})`,
+          items: items.map((i) => ({ id: i.id, name: i.name, price: i.price, quantity: i.quantity })),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Could not start payment");
 
-          setProcessing(false);
-          if (verifyData.success) {
-            setPaymentResult("success");
-            setStep(3);
-            clearCart();
-          } else {
-            setPaymentResult("failure");
-          }
-        },
-        modal: {
-          ondismiss: () => {
-            setProcessing(false);
-          },
-        },
-      };
-
-      const rzp = new window.Razorpay(options);
-      rzp.open();
+      // Auto-submit a hidden POST form → redirects to Omniware's hosted page.
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = data.action;
+      Object.entries(data.fields as Record<string, string>).forEach(([key, value]) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = value ?? "";
+        form.appendChild(input);
+      });
+      document.body.appendChild(form);
+      form.submit();
     } catch (err) {
       console.error(err);
       setProcessing(false);
@@ -193,7 +174,6 @@ export default function CheckoutPage() {
 
   return (
     <>
-    <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="beforeInteractive" />
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 max-w-6xl">
       <h1 className="text-2xl font-bold font-outfit text-[#3E2723] mb-8">
         Checkout
@@ -340,7 +320,7 @@ export default function CheckoutPage() {
 
                   {/* Pay Button */}
                   <Button
-                    onClick={handleRazorpayPayment}
+                    onClick={handleOmniwarePayment}
                     disabled={processing || !agreed}
                     className={`w-full h-12 text-[#FFFDF5] font-bold rounded-xl text-base transition-all ${!agreed ? "bg-[#1B5E20]/50 cursor-not-allowed" : "neon-btn"}`}
                   >
