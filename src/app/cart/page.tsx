@@ -19,7 +19,7 @@ export default function CartPage() {
 
   const subtotal = getSubtotal();
   const total = getTotal();
-  const shipping = subtotal >= 5000 ? 0 : 149;
+  const shipping: number = 0;
   const discountAmount = (subtotal * couponDiscount) / 100;
 
   const handleApplyCoupon = () => {
