@@ -47,7 +47,7 @@ export const PRODUCTS: Product[] = [
     name: "BioHorizons Tapered Internal Plus Implant",
     brand: "BioHorizons",
     category: "Implants",
-    price: 100,
+    price: 1,
     originalPrice: 15000,
     rating: 4.8,
     reviews: 124,
