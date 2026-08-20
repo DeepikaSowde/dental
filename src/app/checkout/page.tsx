@@ -31,11 +31,25 @@ export default function CheckoutPage() {
   const [processing, setProcessing] = useState(false);
   const [paymentResult, setPaymentResult] = useState<"success" | "failure" | null>(null);
   const [agreed, setAgreed] = useState(false);
+  // Snapshot of the order taken at payment time. The cart is cleared once a
+  // payment succeeds, so the Confirmation step reads these instead of the
+  // (now-empty) cart — otherwise the summary would show ₹0.
+  const [confirmedItems, setConfirmedItems] = useState<typeof items>([]);
+  const [confirmedTotal, setConfirmedTotal] = useState<number | null>(null);
+  const [confirmedOrderId, setConfirmedOrderId] = useState<string | null>(null);
 
   const subtotal = getSubtotal();
   const total = getTotal();
   const shipping: number = 0;
   const finalTotal = total + shipping;
+
+  // On the Confirmation step the cart is already cleared, so fall back to the
+  // snapshot captured at payment time (otherwise the summary reads ₹0).
+  const summaryItems = step === 3 ? confirmedItems : items;
+  const summarySubtotal = step === 3
+    ? confirmedItems.reduce((s, i) => s + i.price * i.quantity, 0)
+    : subtotal;
+  const summaryTotal = step === 3 && confirmedTotal !== null ? confirmedTotal : finalTotal;
 
   const [address, setAddress] = useState({
     name: "", phone: "", email: "", pincode: "",
@@ -55,6 +69,12 @@ export default function CheckoutPage() {
     const pay = params.get("payment");
     if (!pay) return;
     if (pay === "success") {
+      // Snapshot the cart before clearing it, so the Confirmation summary
+      // shows what was actually ordered/paid rather than an empty cart.
+      const snap = useCartStore.getState();
+      setConfirmedItems(snap.items);
+      setConfirmedTotal(snap.getTotal() + shipping);
+      setConfirmedOrderId(params.get("order_id")); // real id from the gateway callback
       setPaymentResult("success");
       setStep(3);
       clearCart();
@@ -70,6 +90,9 @@ export default function CheckoutPage() {
 
     // Cash on Delivery skips the gateway entirely — place the order directly.
     if (paymentMethod === "cod") {
+      setConfirmedItems(items);
+      setConfirmedTotal(finalTotal);
+      setConfirmedOrderId(`TW${Date.now()}`); // COD has no gateway order id
       setPaymentResult("success");
       setStep(3);
       clearCart();
@@ -145,7 +168,7 @@ export default function CheckoutPage() {
     <div className="card-glass rounded-xl p-5 sticky top-24">
       <h3 className="font-semibold text-[#3E2723] mb-4 text-sm">Order Summary</h3>
       <div className="space-y-3 mb-4 max-h-52 overflow-y-auto">
-        {items.map((item) => (
+        {summaryItems.map((item) => (
           <div key={item.id} className="flex gap-3 items-center">
             <div className="w-12 h-12 rounded-lg bg-[#FAF6ED] border border-[#1B5E20]/10 shrink-0 overflow-hidden">
               <img src={item.image} alt={item.name} className="w-full h-full object-contain p-1" />
@@ -159,11 +182,11 @@ export default function CheckoutPage() {
         ))}
       </div>
       <div className="border-t border-[#1B5E20]/08 pt-3 space-y-2 text-xs text-[#3E2723]">
-        <div className="flex justify-between"><span>Subtotal</span><span>₹{subtotal.toLocaleString("en-IN")}</span></div>
-        {couponDiscount > 0 && <div className="flex justify-between text-[#10B981]"><span>Discount</span><span>-₹{((subtotal * couponDiscount) / 100).toLocaleString("en-IN")}</span></div>}
+        <div className="flex justify-between"><span>Subtotal</span><span>₹{summarySubtotal.toLocaleString("en-IN")}</span></div>
+        {couponDiscount > 0 && <div className="flex justify-between text-[#10B981]"><span>Discount</span><span>-₹{((summarySubtotal * couponDiscount) / 100).toLocaleString("en-IN")}</span></div>}
         <div className="flex justify-between"><span>Shipping</span><span className={shipping === 0 ? "text-[#10B981]" : ""}>{shipping === 0 ? "FREE" : `₹${shipping}`}</span></div>
         <div className="flex justify-between font-bold text-[#3E2723] text-sm pt-2 border-t border-[#1B5E20]/08">
-          <span>Total</span><span>₹{finalTotal.toLocaleString("en-IN")}</span>
+          <span>Total</span><span>₹{summaryTotal.toLocaleString("en-IN")}</span>
         </div>
       </div>
       <div className="mt-4 flex items-center gap-1.5 text-[10px] text-[#5D4037]">
@@ -371,7 +394,7 @@ export default function CheckoutPage() {
                 <p className="text-[#5D4037] mb-2">Thank you for ordering from Thaarwin Enterprises</p>
                 <div className="inline-block px-4 py-2 rounded-lg bg-[#1B5E20]/10 border border-[#1B5E20]/20 mb-6">
                   <span className="text-xs text-[#5D4037]">Order ID: </span>
-                  <span className="text-sm font-bold text-[#1B5E20]">TW{Date.now().toString().slice(-8)}</span>
+                  <span className="text-sm font-bold text-[#1B5E20]">{confirmedOrderId || "—"}</span>
                 </div>
                 <div className="grid grid-cols-3 gap-4 max-w-sm mx-auto mb-8">
                   <div className="p-3 rounded-xl bg-[#FFFFFF] border border-[#1B5E20]/08 text-center">
@@ -382,7 +405,7 @@ export default function CheckoutPage() {
                   <div className="p-3 rounded-xl bg-[#FFFFFF] border border-[#1B5E20]/08 text-center">
                     <CreditCard className="h-5 w-5 text-[#1B5E20] mx-auto mb-1" />
                     <div className="text-xs text-[#5D4037]">Paid</div>
-                    <div className="text-xs font-semibold text-[#3E2723]">₹{finalTotal.toLocaleString("en-IN")}</div>
+                    <div className="text-xs font-semibold text-[#3E2723]">₹{summaryTotal.toLocaleString("en-IN")}</div>
                   </div>
                   <div className="p-3 rounded-xl bg-[#FFFFFF] border border-[#1B5E20]/08 text-center">
                     <Check className="h-5 w-5 text-[#10B981] mx-auto mb-1" />
